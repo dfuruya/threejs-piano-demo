@@ -1,45 +1,46 @@
-import { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import * as THREE from 'three';
+import { Canvas } from '@react-three/fiber';
+import { Plane, OrbitControls } from '@react-three/drei';
+import Megaphone from './Megaphone'; /* highlight-line */
 
-const App = () => {
-  const [count, setCount] = useState(0);
+const ROTATE_90_DEGREES = [-Math.PI / 2, 0, 0];
 
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Vite + React</h1>
-        <p>
-          <button onClick={() => setCount(count => count + 1)}>
-            count is {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://react.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <Canvas
+      camera={{ position: [200, 200, 0], fov: 25 }}
+      shadows={'soft'}
+      style={{
+        backgroundColor: '#444',
+        width: '100vw',
+        height: '100vh',
+      }}
+    >
+      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.5} />
+      <directionalLight
+        position={[0, 400, -50]}
+        intensity={10}
+        castShadow
+        shadow-mapSize={1024}
+      />
+      <Suspense fallback={null}>
+        <Megaphone castShadow position={[0, 2, 0]} />
+      </Suspense>
+      <Plane
+        receiveShadow
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, 0, 0]}
+        args={[100, 100]}
+      >
+        <meshStandardMaterial
+          attach="material"
+          color="white"
+          // wireframe
+        />
+      </Plane>
+      <OrbitControls />
+    </Canvas>
   );
-};
-
-export default App;
+}
