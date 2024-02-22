@@ -1,7 +1,12 @@
+import { generateKeysData, makeChromatic } from "../utils/music";
+
 export const HALF_STEP = Math.pow(2, (1/12))
 export const CONCERT_A = 440
 export const KEY_OFFSET = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b']
 export const NOTES_PER_OCTAVE = 12;
+
+export const PIANO_KEYS = generateKeysData();
+export const ALL_NOTES = makeChromatic();
 
 // const PATTERN_CHROMATIC = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 // const PATTERN_MAJOR = [0, 4, 7]

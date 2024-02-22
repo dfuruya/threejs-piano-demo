@@ -28,3 +28,22 @@ export function makeChromatic() {
 export function getFreq(notes, index) {
   return notes[index]?.hz;
 }
+
+/**
+ * Data required to visually position the keys
+ * @returns { offset: number; isBlack: boolean }
+ */
+export function generateKeysData() {
+  let allKeys = [];
+  for (let i = 0; i < 13; i++) {
+    if (i !== 5) {
+      allKeys.push(getPos(i));
+    }
+  }
+  return allKeys;
+}
+
+function getPos(i) {
+  const isOdd = i % 2;
+  return { offset: i / 2, isBlack: isOdd };
+}

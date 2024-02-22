@@ -1,5 +1,6 @@
 import { Box } from '@react-three/drei';
 import FakeGlowMaterial from './FakeGlowMaterial';
+import { useState } from 'react';
 
 export default function BoxTarget({
   position,
@@ -8,13 +9,22 @@ export default function BoxTarget({
   onClick,
   shaderControls,
 }) {
+  // value of glowInternalRadius
+  const [girVal, setGirVal] = useState(shaderControls.glowInternalRadius.value);
+  function handleClick() {
+    setGirVal(-1.8);
+    onClick();
+  }
+
+  const controls = {...shaderControls, glowInternalRadius: girVal };
+
   return (
     <>
       <Box
         castShadow
         position={position}
         args={size}
-        onClick={onClick}
+        onClick={handleClick}
       >
         <meshStandardMaterial
           attach="material"
@@ -26,7 +36,7 @@ export default function BoxTarget({
         position={position}
         args={size}
       >
-        <FakeGlowMaterial {...shaderControls} />
+        <FakeGlowMaterial {...controls } />
       </Box>
     </>
   );

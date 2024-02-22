@@ -1,12 +1,9 @@
 import { useEffect, useContext, useState, useRef } from "react";
 import context from "../context";
-import { getFreq, makeChromatic } from "../utils/audio";
-
-const ALL_NOTES = makeChromatic();
+import { getFreq } from "../utils/music";
+import { ALL_NOTES } from "../consts/audio";
 
 export default ({ frequency = 440, type = "sine" } = {}) => {
-  // const [oscillator, setOscillator] = useState(undefined);
-  // const [nodeGain, setNodeGain] = useState(undefined);
   const oscillator = useRef();
   const nodeGain = useRef();
   const [playing, setPlaying] = useState(false);
