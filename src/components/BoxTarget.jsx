@@ -1,22 +1,45 @@
 import { Box } from '@react-three/drei';
 import FakeGlowMaterial from './FakeGlowMaterial';
-import { useState } from 'react';
+import { useRef } from 'react';
+import { useTimer } from 'use-timer';
+import { useFrame } from '@react-three/fiber';
+import { KEYS_SHADER_DEFAULTS } from '../consts/keysShader';
 
 export default function BoxTarget({
   position,
   color = 'white',
   size = [5, 5, 5],
   onClick,
-  shaderControls,
 }) {
-  // value of glowInternalRadius
-  const [girVal, setGirVal] = useState(shaderControls.glowInternalRadius.value);
+  const shaderControls = KEYS_SHADER_DEFAULTS;
+  const defaultGirValue = shaderControls.glowInternalRadius;
+  console.log(defaultGirValue);
+  const girVal = useRef(defaultGirValue);
+  const { time, start, pause, reset, status } = useTimer({ interval: 1 });
+
+  useFrame(() => {
+    if (status === "RUNNING") {
+      if (girVal.current < defaultGirValue) {
+        girVal.current += 0.05;
+      }
+      if (time >= 1500) {
+        pause();
+        reset();
+        girVal.current = defaultGirValue;
+      }
+    }
+  });
+
   function handleClick() {
-    setGirVal(-1.8);
+    girVal.current = -1.8;
+    start();
     onClick();
   }
 
-  const controls = {...shaderControls, glowInternalRadius: girVal };
+  const controls = {
+    ...shaderControls, 
+    glowInternalRadius: girVal.current,
+  };
 
   return (
     <>
