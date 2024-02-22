@@ -3,7 +3,7 @@ export const KEYS_SHADER_DEFAULTS = {
   glowSharpness: 3.7,
   glowColor: '#a058c1',
   glowInternalRadius: 5,
-  opacity: 0.5,  
+  opacity: 0.4,
 };
 
 // export const KEYS_SHADER_DEFAULTS_LEVA_CONTROLS = {

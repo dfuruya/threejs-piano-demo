@@ -13,7 +13,6 @@ export default function BoxTarget({
 }) {
   const shaderControls = KEYS_SHADER_DEFAULTS;
   const defaultGirValue = shaderControls.glowInternalRadius;
-  console.log(defaultGirValue);
   const girVal = useRef(defaultGirValue);
   const { time, start, pause, reset, status } = useTimer({ interval: 1 });
 

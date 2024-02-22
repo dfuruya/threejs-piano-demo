@@ -9,7 +9,7 @@ import { ROTATE_90_DEGREES } from './consts/math';
 export default function App() {
   return (
     <Canvas
-      camera={{ position: [200, 200, 0], fov: 25 }}
+      camera={{ position: [100, 50, 0], fov: 50 }}
       shadows={'soft'}
       style={{
         backgroundColor: '#444',
