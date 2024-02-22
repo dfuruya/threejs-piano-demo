@@ -40,10 +40,12 @@ export default function App() {
           // wireframe
         />
         <Text
+          castShadow
           color="black"
           anchorX="center"
           anchorY="middle"
           rotation={ROTATE_X_DEGREES}
+          position={[0, 0, 2]}
         >
           HELLO WORLD!
         </Text>
