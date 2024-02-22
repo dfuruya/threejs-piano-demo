@@ -1,8 +1,8 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Plane, OrbitControls } from '@react-three/drei';
+import { Plane, OrbitControls, Text } from '@react-three/drei';
 import Piano from './components/Piano/Piano';
-import { ROTATE_90_DEGREES } from './consts/math';
+import { ROTATE_90_DEGREES, ROTATE_X_DEGREES } from './consts/math';
 // import { Bloom, EffectComposer } from '@react-three/postprocessing';
 // import Megaphone from './Megaphone'; /* highlight-line */
 
@@ -39,6 +39,14 @@ export default function App() {
           color="white"
           // wireframe
         />
+        <Text
+          color="black"
+          anchorX="center"
+          anchorY="middle"
+          rotation={ROTATE_X_DEGREES}
+        >
+          HELLO WORLD!
+        </Text>
       </Plane>
       {/* <EffectComposer>
         <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} height={480} />
