@@ -1,5 +1,5 @@
 {
-  "name": "threejs-canon-demo",
+  "name": "threejs-piano-demo",
   "version": "1.4.0",
   "type": "module",
   "scripts": {
@@ -21,6 +21,7 @@
     "@testing-library/react": "^14.1.2",
     "@vitejs/plugin-react": "^4.2.1",
     "jsdom": "^23.0.1",
+    "leva": "^0.9.35",
     "vite": "^5.0.8",
     "vitest": "^1.1.1"
   },

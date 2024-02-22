@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    exclude: ['js-big-decimal']
+  },
   test: {
     globals: true,
     environment: 'jsdom',
