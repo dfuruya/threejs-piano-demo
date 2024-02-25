@@ -1,4 +1,4 @@
-import { CONCERT_A, HALF_STEP, KEY_OFFSET } from "../consts/audio"
+import { CONCERT_A, HALF_STEP, KEY_OFFSET, NOTES_PER_OCTAVE } from "../consts/audio"
 
 export function makeChromatic() {
   let temp = CONCERT_A
@@ -46,4 +46,8 @@ export function generateKeysData() {
 function getPos(i) {
   const isOdd = i % 2;
   return { offset: i / 2, isBlack: isOdd };
+}
+
+export function getPianoKeyIndex(index, octave) {
+  return NOTES_PER_OCTAVE * octave + index;
 }
