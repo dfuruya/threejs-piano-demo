@@ -1,12 +1,10 @@
-import { generateKeysData, makeChromatic } from "../utils/music";
+export const HALF_STEP = Math.pow(2, (1/12));
+export const CONCERT_A = 440;
 
-export const HALF_STEP = Math.pow(2, (1/12))
-export const CONCERT_A = 440
-export const KEY_OFFSET = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b']
 export const NOTES_PER_OCTAVE = 12;
 
-export const PIANO_KEYS = generateKeysData();
-export const ALL_NOTES = makeChromatic();
+// export const PIANO_KEYS = generateKeysData();
+// export const ALL_NOTES = makeChromatic();
 
 export const COMPRESSOR_DEFAULTS = {
   threshold: -50,
