@@ -3,7 +3,7 @@ import context from "../context";
 
 export default function useOscillator(range) {
   const merger = useRef();
-  const nodeGain = useRef();
+  const gainNode = useRef();
   const { audioContext } = useContext(context);
 
   useEffect(() => {
@@ -18,34 +18,41 @@ export default function useOscillator(range) {
       .connect(nGain)
       .connect(audioContext.destination);
 
-    nodeGain.current = nGain;
+    gainNode.current = nGain;
     merger.current = channelMerger;
   }
 
   function dispose() {
+    gainNode.current.disconnect();
+    merger.current.disconnect();
     audioContext.suspend();
   }
 
   // one-shot
   function playNote(index) {
-    const oscillatorNode = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    oscillatorNode
-      .connect(gainNode)
+    // create nodes (must be done for each invocation)
+    const oscNode = audioContext.createOscillator();
+    const gNode = audioContext.createGain();
+    oscNode
+      .connect(gNode)
       .connect(merger.current, 0, 1);
+
+    // setup
     const rightNow = audioContext.currentTime;
     const duration = 2;  // seconds
     const end = rightNow + duration;
     const freq = range[index].hz;
-    oscillatorNode.frequency.value = freq;
-    oscillatorNode.frequency.setTargetAtTime(freq, rightNow, 0)
-    gainNode.gain.setValueAtTime(1, rightNow);
-    gainNode.gain.linearRampToValueAtTime(0, end);
-    oscillatorNode.start();
-    oscillatorNode.stop(end);
+    oscNode.frequency.value = freq;
+    oscNode.frequency.setTargetAtTime(freq, rightNow, 0)
+    gNode.gain.setValueAtTime(1, rightNow);
+    gNode.gain.linearRampToValueAtTime(0, end);
+
+    // now trigger the audio
+    oscNode.start();
+    oscNode.stop(end);
     setTimeout(() => {
-      gainNode.disconnect();
-      oscillatorNode.disconnect();
+      gNode.disconnect();
+      oscNode.disconnect();
     }, end * 1000);
   }
 
