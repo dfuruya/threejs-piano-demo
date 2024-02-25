@@ -1,5 +1,7 @@
 import { useEffect, useContext, useRef } from "react";
 import context from "../context";
+import { setNodeValues } from "../utils/audio";
+import { COMPRESSOR_DEFAULTS } from "../consts/audio";
 
 export default function useOscillator(range) {
   const merger = useRef();
@@ -12,13 +14,16 @@ export default function useOscillator(range) {
   }, []);
 
   function init() {
-    const nGain = audioContext.createGain();
+    const mainGainNode = audioContext.createGain();
     const channelMerger = audioContext.createChannelMerger(range.length);
+    const compressor = audioContext.createDynamicsCompressor();
+    setNodeValues(compressor, COMPRESSOR_DEFAULTS);
     channelMerger
-      .connect(nGain)
+      .connect(mainGainNode)
+      .connect(compressor)
       .connect(audioContext.destination);
 
-    gainNode.current = nGain;
+    gainNode.current = mainGainNode;
     merger.current = channelMerger;
   }
 

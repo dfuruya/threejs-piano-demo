@@ -8,6 +8,14 @@ export const NOTES_PER_OCTAVE = 12;
 export const PIANO_KEYS = generateKeysData();
 export const ALL_NOTES = makeChromatic();
 
+export const COMPRESSOR_DEFAULTS = {
+  threshold: -50,
+  knee: 40,
+  ratio: 12,
+  attack: 0,
+  release: 0.15,
+};
+
 // const PATTERN_CHROMATIC = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 // const PATTERN_MAJOR = [0, 4, 7]
 // const PATTERN_MINOR = [0, 3, 7]
