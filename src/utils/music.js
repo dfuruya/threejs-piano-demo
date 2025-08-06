@@ -67,13 +67,6 @@ export function makeChromatic() {
   return list;
 }
 
-function getPreviousOffset(list, index) {
-  if (index === 0) {
-    return 0.5;
-  }
-  return list[index - 1].offset;
-}
-
 export function isBlack(note) {
   return note.color === BLACK;
 }
